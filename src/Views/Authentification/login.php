@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="">
+        <form method="POST" action="/">
             <h1>Login</h1>
             <div class="input-box">
                 <input type="text" placeholder="username" required>

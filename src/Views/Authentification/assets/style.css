@@ -12,12 +12,15 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('./images/wallpaperflare.com_wallpaper.jpg') no-repeat;
+    background: url('./images/img.jpg') no-repeat;
 }
 
 .container {
     width: 420px;
-    background: black;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;
