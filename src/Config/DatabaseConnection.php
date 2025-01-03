@@ -1,4 +1,10 @@
 <?php
+
+namespace App\Config;
+
+use \PDO;
+use \PDOException;
+
 class DatabaseConnection
 {
     private $host="localhost";
@@ -8,7 +14,6 @@ class DatabaseConnection
     private $connexion;
 
     public function connect() {
-
       try {
         $this->connexion = new PDO("mysql:host=$this->host;dbname=$this->dbname",$this->user,$this->pass  );
         // echo "Connexion réussie !";
@@ -18,8 +23,5 @@ class DatabaseConnection
         echo "Erreur de connexion : " . $e->getMessage();
       }
     }
-    
-
-
 }
 ?>

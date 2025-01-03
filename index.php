@@ -1,17 +1,11 @@
-<?php 
-    require_once 'src/config/Database.php';
-    $db = new DatabaseConnection();
-    $db->connect();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CareerLink</title>
 </head>
 <body>
-    HELLO world!
+    
 </body>
 </html>

@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    Recruiter Dashboard
+    Admin Dashboard!
 </body>
 </html>

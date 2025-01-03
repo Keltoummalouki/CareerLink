@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    Recruiter Dashboard
+    Candidate (OFFRE PAGE)
 </body>
 </html>
