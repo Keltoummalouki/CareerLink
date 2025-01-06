@@ -1,8 +1,8 @@
 <?php 
 
-    namespace App\Classes;
+    namespace App\Controllers;
     
-    class SessionManager {
+    class SessionController {
         public function __construct(){
             if(session_status() == PHP_SESSION_NONE) {
                 session_start();

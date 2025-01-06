@@ -1,27 +1,25 @@
 <?php
-
 namespace App\Config;
 
-use \PDO;
-use \PDOException;
+// require_once '../../vendor/autoload.php';
 
-class DatabaseConnection
-{
-    private $host="localhost";
-    private $dbname="CareerLink";
-    private $user="root";
-    private $pass="";
+use Dotenv\Dotenv;
+use PDO;
+use PDOException;
+
+class DatabaseConnection{
     private $connexion;
 
-    public function connect() {
-      try {
-        $this->connexion = new PDO("mysql:host=$this->host;dbname=$this->dbname",$this->user,$this->pass  );
-        // echo "Connexion réussie !";
-        return $this->connexion;
-      }
-      catch (PDOException $e) {
-        echo "Erreur de connexion : " . $e->getMessage();
-      }
+
+    public function connect()
+    {
+        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+        try {
+            $this->connexion = new PDO("mysql:host=".$_ENV["LOCALHOST"].";dbname=".$_ENV["DATABASE"],$_ENV["USER"],$_ENV["USER_PASSWORD"]);
+            return $this->connexion;
+        } catch (PDOException $th) {
+            die("connexion faild".$th->getMessage());
+        }
     }
 }
-?>

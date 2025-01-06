@@ -2,49 +2,22 @@
 
     require("../../../vendor/autoload.php");
 
-    use App\config\DatabaseConnection;
-    use App\Classes\SessionManager;
-    use App\Classes\AuthManager;
+    use App\Controllers\AuthController;
 
-    $db = new DatabaseConnection();
-    $connexion = $db->connect();
-
-    $session = new SessionManager();
-    $auth = new AuthManager($session);
-
-    $email = ''; //bach mayb9awch Undefined
-    $password = '';
     
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $email = isset($_POST['email']) ? trim($_POST['email']) : ''; // hna ghaytbdlo ila dakhlhom
-        $password = isset($_POST['password']) ? $_POST['password'] : '';
-    }
-    
-    $query = 'SELECT * FROM MEMBER JOIN ROLE ON role.id = member.role_id WHERE email = ? AND password = ?';
-    $stmt = $connexion->prepare($query);
-    
-    if (!empty($email) && !empty($password)) {
-        $stmt->execute([$email, $password]);
-        $member = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-        if ($member) {
-            $auth->login($member['id'], $member['role']);
-    
-            if ($member['role'] === 'Admin') {
-                header('Location: ../admin/dashboard.php');
-            } elseif ($member['role'] === 'Recruiter') {
-                header('Location: ../recruiter/index.php');
-            } else {
-                header('Location: ../candidate/index.php');
-            }
-            exit;
-        } else {
-            $error = "The password or Email is incorrect.";
+    if(isset($_POST["submit-btn"]))
+    {
+        if(empty($_POST["email"]) && empty($_POST["password"]))
+        {
+            echo "email or password is empty";
         }
-    } else {
-        $error = "Please fill in all fields.";
+        else{
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            $authController = new AuthController();
+            $authController->login($email, $password);
+        }
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

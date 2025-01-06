@@ -1,27 +1,25 @@
 <?php 
+namespace App\Classes;
+
     class Role {
         private $id;
-        private $role;
+        private $name;
 
-        public function __construct($id,$role){
+        public function __construct($id, $name) {
             $this->id = $id;
-            $this->role = $role;
+            $this->name = $name;
         }
-
+        
         public function getId(){
             return $this->id;
         }
 
-        public function getRole(){
-            return $this->role;
+        public function getName(){
+            return $this->name;
         }
 
-        public function setId($id){
-            $this->id = $id;
-        }
-
-        public function setRole($role){
-            $this->role = $role;
+        public function setName($name){
+            $this->name = $name;
         }
         
     }
