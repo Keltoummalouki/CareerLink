@@ -24,7 +24,7 @@ class AuthController{
         }
         else{
 
-            $session->set('user', $member);
+            $session->set('membre', $member);
 
             if($member->getRole()->getName() == "Admin")
             {
@@ -44,25 +44,48 @@ class AuthController{
         }
     }
      
-    public function register($name, $email, $role, $password){
+    // public function register($name, $email, $role, $password){
 
-        // $session = new SessionController();
+    //     $newMember = new NewMemberModel();
+    //     $newMember->addMember($name, $email, $role, $password);
 
-        $newMemberModel = new NewMemberMode();
-        $newMember = $newMemberModel->addMember($name, $email, $role,$password);
+    //     // $session = new SessionController();
 
-        if($newMember !== null){
+    //     if($newMember !== null){
 
-            $session->set('user', $newMember);
+    //         // $session->set('member', $member);
 
-            if($newMember->getRole()->getName() == "2")
-            {
-              header("Location: ../recruiter/home.php");
-            }
-            else if($newMember->getRole()->getName() == "3")
-            {
-              header("Location: ../candidate/home.php");
-            }
+    //         if($newMember->getRole()->getName() == "2")
+    //         {
+    //           header("Location: ../recruiter/home.php");
+    //           exit();
+    //         }
+    //         else if($newMember->getRole()->getName() == "3")
+    //         {
+    //           header("Location: ../candidate/home.php");
+    //           exit();
+    //         }
+    //     }
+    // }
+
+    public function register($name, $email, $roleId, $password) {
+      $newMember = new NewMemberModel();
+
+      
+      $session = new SessionController();
+
+        $result = $newMember->addMember($name, $email, $roleId, $password);
+        $session->set('membre', $roleId);
+          
+        switch($roleId) {
+            case "2": 
+                header("Location: ../recruiter/index.php");
+                break;
+            case "3":
+                header("Location: ../candidate/index.php");
+                break;
         }
-    }
+          exit();
+
+  }
 }

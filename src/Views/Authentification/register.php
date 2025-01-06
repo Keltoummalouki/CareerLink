@@ -16,8 +16,8 @@
             if ($role === "") {
                 echo "Please select a role.";
             } else {
-                $authControllerRegister = new AuthController();
-                $authControllerRegister->register($name, $email, $role, $password);
+                $authController = new AuthController();
+                $authController->register($name, $email, $role, $password);
             }
         }
     }

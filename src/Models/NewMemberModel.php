@@ -18,8 +18,8 @@ class NewMemberModel {
     public function addMember($name, $email, $role, $password) {
         try {
             // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO member (name, email, password, role_id )
-                    VALUES (:name, :email, :password, :role);";
+            $query = "INSERT INTO member (name, email,role_id, password  )
+                    VALUES (:name, :email, :role, :password);";
 
             $stmt = $this->connexion->prepare($query);
             $stmt->bindParam(':name', $name);
