@@ -1,7 +1,10 @@
 <?php
 namespace App\Models;
 
+use App\Classes\Role;
+use App\Classes\Member;
 use App\Config\DatabaseConnection;
+use PDOException;
 use PDO;
 
 class NewMemberModel {
@@ -12,20 +15,21 @@ class NewMemberModel {
         $this->connexion = $db->connect();
     }
 
-    public function addMember($name, $email, $role_id, $password) {
-        $insert = "INSERT INTO member (name, email, password, role_id)
-                    VALUES (:name, :email, :password, :role_id);";
+    public function addMember($name, $email, $role, $password) {
+        try {
+            // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO member (name, email, password, role_id )
+                    VALUES (:name, :email, :password, :role);";
 
-        $stmt = $this->connexion->prepare($insert);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':role_id', $role_id);
-        $stmt->bindParam(':password', $password);
+            $stmt = $this->connexion->prepare($query);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':role', $role);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->execute();
 
-        if ($stmt->execute()) {
-            $newMember = $this->connexion->lastInsertId();
-            return $newMember;
-        } else {
+            return $this->connexion->lastInsertId();
+        } catch (PDOException $e) {
             return null; 
         }
     }

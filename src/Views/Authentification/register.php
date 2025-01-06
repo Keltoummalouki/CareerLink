@@ -7,18 +7,17 @@
     
     if(isset($_POST["submit-btn"])) {
         if(empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["role"]) || empty($_POST["password"])) {
-            echo "All fields are required.";
         } else {
             $name = $_POST["name"];
             $email = $_POST["email"];
             $role = $_POST["role"];
             $password = $_POST["password"];
-    
+            
             if ($role === "") {
                 echo "Please select a role.";
             } else {
-                $authController = new AuthController();
-                $authController->register($name, $email, $role, $password);
+                $authControllerRegister = new AuthController();
+                $authControllerRegister->register($name, $email, $role, $password);
             }
         }
     }
@@ -36,25 +35,25 @@
 </head>
 <body>
     <div class="container">
-        <form method="POST" action="">
+        <form method="POST" action="" aling="center">
             <h1>Register</h1>
             <div class="input-box">
-                <input type="text" placeholder="Name" name="name" required>
+                <input type="text" placeholder="Name" name="name" require>
                 <box-icon type='solid' name='user-circle'></box-icon>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="Email" name="email" required>
+                <input type="text" placeholder="Email" name="email" require>
                 <box-icon type='solid' name='user-circle'></box-icon>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="Password" name="password" required autocomplete="off">
+                <input type="text" placeholder="Password" name="password" require autocomplete="off">
                 <box-icon name='lock-alt' type='solid' ></box-icon>
             </div>
             <div class="input-box">
                 <select class="input-select" for="role" name="role" require>
                 <option value="">Role</option>
-                <option value="Recruiter">Recruiter</option>
-                <option value="Condidate">Condidate</option>
+                <option value="2">Recruiter</option>
+                <option value="3">Condidate</option>
                 </select>
             </div>
 

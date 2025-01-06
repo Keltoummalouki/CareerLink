@@ -33,11 +33,11 @@
         <form method="POST" action="">
             <h1>Login</h1>
             <div class="input-box">
-                <input type="text" placeholder="Email" name="email" required>
+                <input type="text" placeholder="Email" name="email" require>
                 <box-icon type='solid' name='user-circle'></box-icon>
             </div>
             <div class="input-box">
-                <input type="text" placeholder="Password" name="password" required autocomplete="off">
+                <input type="text" placeholder="Password" name="password" require autocomplete="off">
                 <box-icon name='lock-alt' type='solid' ></box-icon>
             </div>
             <div class="remember-me">

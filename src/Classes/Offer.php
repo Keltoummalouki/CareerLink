@@ -1,4 +1,5 @@
 <?php 
+namespace App\Classes;
     class Member {
         private $id;
         private $title;

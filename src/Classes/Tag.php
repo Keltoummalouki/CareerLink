@@ -1,5 +1,7 @@
 <?php 
-    class Category {
+
+namespace App\Classes;
+    class Tag {
         private $id;
         private $name;
 

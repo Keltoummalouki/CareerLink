@@ -4,19 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CareerLink - Trouvez votre prochain emploi</title>
-    <link rel="stylesheet" href="../CareerLink/assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">Career<span>Link</span></div>
-            <div class="nav-links">
-                <a href="#emplois">Emplois</a>
-                <a href="#entreprises">Entreprises</a>
-                <a href="#candidats">Espace Candidat</a>
-                <a href="#recruteurs">Espace Recruteur</a>
+<header>
+        <div class="logosec">
+        <div class="logo">Career<span>Link</span></div>
+        </div>
+
+        <div class="searchbar">
+            <input type="text"
+                placeholder="Search">
+            <div class="searchbtn">
+                <img src="./assets/images/Icons/search.png"
+                    class="icn srchicn"
+                    alt="search-icon">
             </div>
-        </nav>
+        </div>
+
+        <div class="message">
+            <div class="circle"></div>
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png"
+                class="icn"
+                alt="">
+            <div class="dp">
+                <img src="./assets/images/Icons/Profil.png"
+                    class="dpicn"
+                    alt="dp">
+                    <a href="./src/Views/authentification/login.php"></a>
+            </div>
+        </div>
     </header>
 
     <section class="hero">

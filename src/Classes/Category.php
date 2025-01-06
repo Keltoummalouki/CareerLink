@@ -1,4 +1,6 @@
 <?php 
+namespace App\Classes;
+
     class Category {
         private $id;
         private $name;

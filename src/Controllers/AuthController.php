@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Classes\Member;
+use App\Classes\Role;
 use App\Config\DatabaseConnection;
 use App\Models\MemberModel;
 use App\Models\NewMemberModel;
@@ -9,8 +10,6 @@ use App\Controllers\SessionController;
 use PDO;
 
 class AuthController{
-   
-
     
     public function login($email, $password){
 
@@ -47,33 +46,22 @@ class AuthController{
      
     public function register($name, $email, $role, $password){
 
-        $session = new SessionController();
+        // $session = new SessionController();
 
-
-        $newMemberModel = new NewMemberModel();
+        $newMemberModel = new NewMemberMode();
         $newMember = $newMemberModel->addMember($name, $email, $role,$password);
-        if($newMember == null)
-        {
-            echo "member not found please check ...";
-        }
-        else{
+
+        if($newMember !== null){
 
             $session->set('user', $newMember);
 
-            if($newMember->getRole()->getName() == "Admin")
-            {
-                header('Location: ../admin/dashboard.php');
-                exit();
-            }
-            else if($newMember->getRole()->getName() == "Recruiter")
+            if($newMember->getRole()->getName() == "2")
             {
               header("Location: ../recruiter/home.php");
-              exit();
             }
-            else if($newMember->getRole()->getName() == "Candidate")
+            else if($newMember->getRole()->getName() == "3")
             {
               header("Location: ../candidate/home.php");
-              exit();
             }
         }
     }
