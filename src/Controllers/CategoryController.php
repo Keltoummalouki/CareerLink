@@ -12,5 +12,5 @@ class CategoryController{
       $newCategory = new CategoryModel();
 
       $result = $newCategory->addCategory($name);
-  }
+    }
 }

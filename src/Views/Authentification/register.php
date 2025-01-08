@@ -5,7 +5,7 @@
     use App\Controllers\AuthController;
 
     
-    if(isset($_POST["submit-btn"])) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["role"]) || empty($_POST["password"])) {
         } else {
             $name = $_POST["name"];

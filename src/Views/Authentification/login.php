@@ -7,11 +7,8 @@
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        if(empty($_POST["email"]) && empty($_POST["password"]))
+        if(!empty($_POST["email"]) && !empty($_POST["password"]))
         {
-            header ("Location : ../authentification/login.php");
-        }
-        else{
             $email = $_POST["email"];
             $password = $_POST["password"];
             $authController = new AuthController();

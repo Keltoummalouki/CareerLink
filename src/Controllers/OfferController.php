@@ -1,15 +1,17 @@
 <?php
 namespace App\Controllers;
 
+use App\Classes\Offer;
 use App\Config\DatabaseConnection;
-use App\Models\CategoryModel;
+use App\Models\OfferModel;
 
-class CategoryController{
+class OfferController{
 
-    public function CreateOffer($name,$title,$salary,$location,$member,$caregory) {
+    public function CreateOffer($name,$title,$salary,$location,$category) {
 
       $newOffer = new OfferModel();
 
-      $result = $newOffer->addOffer($name,$title,$salary,$location,$member,$caregory);
-  }
+      $result = $newOffer->addOffer($name,$title,$salary,$location,$category);
+    }
+
 }

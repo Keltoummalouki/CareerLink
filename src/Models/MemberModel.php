@@ -4,7 +4,6 @@ namespace App\Models;
 use App\Classes\Role;
 use App\Classes\Member;
 use App\Config\DatabaseConnection;
-// use App\sessionService\AuthSession;
 use PDOException;
 use PDO;
 

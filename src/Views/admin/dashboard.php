@@ -3,6 +3,10 @@ require_once '../../../vendor/autoload.php';
 
 use App\sessionService\AuthSession;
 use App\sessionService\AuthMiddleware;
+use App\Models\OfferModel;
+use App\Controllers\OfferController;
+use App\Config\DatabaseConnection;
+
 
 $auth = new AuthMiddleware();
 $auth->requireAdmin();
@@ -13,6 +17,18 @@ $session = new AuthSession();
         header("Location: ../authentification/login.php");
         exit();
     }
+
+    $database = new DatabaseConnection();
+    $connexion = $database->connect();
+
+    $totalVisitor = $connexion->query("SELECT COUNT(*) AS count FROM member")->fetch(PDO::FETCH_ASSOC)['count'];
+    $totalRecruiter = $connexion->query("SELECT COUNT(*) AS count FROM member WHERE role_id = 2")->fetch(PDO::FETCH_ASSOC)['count'];
+    $totalCandidate= $connexion->query("SELECT COUNT(*) AS count FROM member WHERE role_id = 3")->fetch(PDO::FETCH_ASSOC)['count'];
+    $totalOffers = $connexion->query("SELECT COUNT(*) AS count FROM offer")->fetch(PDO::FETCH_ASSOC)['count'];
+    // $result = $connexion->query("SELECT * FROM offer")->fetch(PDO::FETCH_ASSOC);
+    $offers = $connexion->query("SELECT * FROM offer")->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -131,7 +147,7 @@ $session = new AuthSession();
             <div class="box-container">
                 <div class="box box1">
                     <div class="text">
-                        <h2 class="topic-heading">60.5k</h2>
+                        <h2 class="topic-heading"><?php echo $totalVisitor ?></h2>
                         <h2 class="topic">ToTal Visitors</h2>
                     </div>
 
@@ -141,7 +157,7 @@ $session = new AuthSession();
 
                 <div class="box box2">
                     <div class="text">
-                        <h2 class="topic-heading">150</h2>
+                        <h2 class="topic-heading"><?php echo $totalRecruiter  ?></h2>
                         <h2 class="topic">Total Recruiters</h2>
                     </div>
 
@@ -151,7 +167,7 @@ $session = new AuthSession();
 
                 <div class="box box3">
                     <div class="text">
-                        <h2 class="topic-heading">320</h2>
+                        <h2 class="topic-heading"><?php echo $totalCandidate ?></h2>
                         <h2 class="topic">Total Candidates</h2>
                     </div>
 
@@ -161,7 +177,7 @@ $session = new AuthSession();
 
                 <div class="box box4">
                     <div class="text">
-                        <h2 class="topic-heading">70</h2>
+                        <h2 class="topic-heading"><?php echo $totalOffers ?></h2>
                         <h2 class="topic">Total Offers</h2>
                     </div>
 
@@ -183,18 +199,46 @@ $session = new AuthSession();
                             <thead>
                                 <tr>
                                     <th class="t-op">Name</th>
-                                    <th class="t-op">Photo</th>
-                                    <th class="t-op">Position</th>
-                                    <th class="t-op">Nationality</th>
-                                    <th class="t-op">Club</th>
-                                    <th class="t-op">Rating</th>
-                                    <th class="t-op">Status</th>
+                                    <th class="t-op">Title</th>
+                                    <th class="t-op">Salary</th>
+                                    <th class="t-op">Location</th>
+                                    <th class="t-op">Category</th>
                                     <th class="t-op"></th>
                                     <th class="t-op"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                            <?php
+                                if (count($offers) > 0) {
+                                    foreach ($offers as $offer){
+                                        echo '<tr class="tr-style">';
+                                        echo '<td class="output">' . $offer['title'] . '</td>';
+                                        echo '<td class="output">' . $offer['salary'] . '</td>';
+                                        echo '<td class="output">' . $offer['location'] . '</td>';
+                                        echo '<td class="output">' . $offer['category_id'] . '</td>';
+                                    }
+                                        echo '<td>
+                                        <form method="POST" action="edit.php?id=<?php echo $id;?>">
+                                            <input type="hidden" name="player_id" value="' . ($offer['id']) . '">
+                                            <button type="submit" class="edit-btn">
+                                                <img src="../../../assets/images/Icons/edit-button.png" class="icon-output" alt="edit-icon">
+                                            </button>
+                                        </form>
+                                        </td>';
+
+                                        echo '<td>
+                                            <form method="POST" action="../includes/delete.php";">
+                                                <input type="hidden" name="player_id" value="' . $offer['id'] . '">
+                                                <button type="submit" class="delete-btn">
+                                                    <img src="../../../assets/images/Icons/delete-icon.png" class="icon-output" alt="delete-icon">
+                                                </button>
+                                            </form>
+                                        </td>';
+
+
+                                        echo '</tr>';
+                                    }
+                                ?>
                             </tbody>
                         </table>
                     </div>

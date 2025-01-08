@@ -12,18 +12,18 @@ class OfferModel {
         $this->connexion = $db->connect();
     }
 
-    public function addOffer($name,$title,$salary,$location,$member,$caregory) {
+
+    public function addOffer($name,$title,$salary,$location,$caregory) {
         try {
 
-            $query = "INSERT INTO offer (name,title,salary,location,member,caregory)
-                        VALUES (:name,:title,:salary,:location,:member,:caregory);";
+            $query = "INSERT INTO offer (name,title,salary,`location`,caregory)
+                        VALUES (:name,:title,:salary,:location,:caregory);";
 
             $stmt = $this->connexion->prepare($query);
             $stmt->bindParam(':name', $name);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':salary', $salary);
             $stmt->bindParam(':location', $location);
-            $stmt->bindParam(':member', $member);
             $stmt->bindParam(':category', $category);
             $stmt->execute();
 
