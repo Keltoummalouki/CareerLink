@@ -1,5 +1,6 @@
 <?php 
 namespace App\Classes;
+
     class Member {
         protected $id;
         protected $name;
@@ -51,6 +52,5 @@ namespace App\Classes;
         public function setPassword($password){
             $this->password = $password;
         }
-        
     }
 ?>

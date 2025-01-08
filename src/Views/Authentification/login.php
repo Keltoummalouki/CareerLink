@@ -5,11 +5,11 @@
     use App\Controllers\AuthController;
 
     
-    if(isset($_POST["submit-btn"]))
+    if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         if(empty($_POST["email"]) && empty($_POST["password"]))
         {
-            echo "email or password is empty";
+            header ("Location : ../authentification/login.php");
         }
         else{
             $email = $_POST["email"];

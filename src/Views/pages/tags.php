@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    Candidate (OFFRE PAGE)
+    tags
 </body>
 </html>

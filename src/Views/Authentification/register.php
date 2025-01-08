@@ -14,7 +14,7 @@
             $password = $_POST["password"];
             
             if ($role === "") {
-                echo "Please select a role.";
+                header ("Location : ../authentification/register.php");
             } else {
                 $authController = new AuthController();
                 $authController->register($name, $email, $role, $password);

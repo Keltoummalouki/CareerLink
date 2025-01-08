@@ -1,6 +1,7 @@
 <?php 
 namespace App\Classes;
-    class Member {
+
+    class Offer {
         private $id;
         private $title;
         private $salary;

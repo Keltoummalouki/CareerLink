@@ -6,14 +6,27 @@ use App\Classes\Role;
 use App\Config\DatabaseConnection;
 use App\Models\MemberModel;
 use App\Models\NewMemberModel;
-use App\Controllers\SessionController;
+use App\sessionService\AuthSession;
 use PDO;
 
 class AuthController{
+
+      public function isValidSession() {
+        if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
+            return false;
+        }
+
+        // Exemple supplémentaire : Validez avec l'IP ou User-Agent
+        if ($_SESSION['ip'] !== $_SERVER['REMOTE_ADDR'] || 
+            $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) {
+            return false;
+        }
+
+        return true;
+    }
+
     
     public function login($email, $password){
-
-        $session = new SessionController();
 
 
         $memberModel = new MemberModel();
@@ -24,7 +37,10 @@ class AuthController{
         }
         else{
 
-            $session->set('membre', $member);
+          $session = new AuthSession();
+          $session->set('id', $member->getId());
+          $session->set('role', $member->getRole()->getName());
+          $session->set('email', $member->getEmail());
 
             if($member->getRole()->getName() == "Admin")
             {
@@ -72,10 +88,13 @@ class AuthController{
       $newMember = new NewMemberModel();
 
       
-      $session = new SessionController();
+      $session = new AuthSession();
+      $session->set('id', $member->getId());
+      $session->set('role', $member->getRole()->getName());
+      $session->set('email', $member->getEmail());
 
-        $result = $newMember->addMember($name, $email, $roleId, $password);
-        $session->set('membre', $roleId);
+      $result = $newMember->addMember($name, $email, $roleId, $password);
+
           
         switch($roleId) {
             case "2": 
@@ -85,7 +104,6 @@ class AuthController{
                 header("Location: ../candidate/index.php");
                 break;
         }
-          exit();
 
   }
 }

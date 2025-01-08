@@ -28,10 +28,11 @@
                 class="icn"
                 alt="">
             <div class="dp">
+            <a href="./src/Views/authentification/login.php"></a>
                 <img src="./assets/images/Icons/Profil.png"
                     class="dpicn"
                     alt="dp">
-                    <a href="./src/Views/authentification/login.php"></a>
+
             </div>
         </div>
     </header>

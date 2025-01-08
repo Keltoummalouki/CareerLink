@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Classes\Role;
 use App\Classes\Member;
 use App\Config\DatabaseConnection;
+// use App\sessionService\AuthSession;
 use PDOException;
 use PDO;
 
@@ -28,10 +29,10 @@ class MemberModel{
     
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             if(!$row){
-
                 return null;
             }
             else{
+
                 $role = new Role($row["role_id"], $row["role_name"]);
                 return new Member($row['id'],$row["name"],$row["email"],$role,$row["password"]);
 

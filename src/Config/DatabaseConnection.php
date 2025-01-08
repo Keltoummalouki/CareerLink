@@ -1,8 +1,6 @@
 <?php
 namespace App\Config;
 
-// require_once '../../vendor/autoload.php';
-
 use Dotenv\Dotenv;
 use PDO;
 use PDOException;

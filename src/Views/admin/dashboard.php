@@ -1,3 +1,20 @@
+<?php
+require_once '../../../vendor/autoload.php';
+
+use App\sessionService\AuthSession;
+use App\sessionService\AuthMiddleware;
+
+$auth = new AuthMiddleware();
+$auth->requireAdmin();
+
+$session = new AuthSession();
+
+    if (!$session->get('id') || $session->get('role') !== "Admin") {
+        header("Location: ../authentification/login.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +51,7 @@
                 <img src="../../../assets/images/Icons/Profil.png"
                     class="dpicn"
                     alt="dp">
-                    <a href="../authentification/login.php"></a>
+                    <a href="../pages/profil.php"></a>
             </div>
         </div>
     </header>
@@ -55,14 +72,14 @@
                         <img src="../../../assets/images/Icons/Candidate.png"
                             class="nav-img"
                             alt="institution">
-                        <a href="../candidate/index.php"> Condidate</a>
+                        <a href="../candidate/index.php"> Candidate</a>
                     </div>
 
                     <div class="option3 nav-option">
                         <img src="../../../assets/images/Icons/recuiter.png"
                             class="nav-img"
                             alt="articles">
-                        <a href="../recruiter/index.php"> Recuiter</a>
+                        <a href="../recruiter/index.php"> Recruiter</a>
                     </div>
 
                     <div class="nav-option option4">
@@ -155,7 +172,11 @@
             <div class="report-container">
                 <div class="report-header">
                     <h1 class="recent-Articles">Recent offers</h1>
-                    <button id="add-btn">Add Offer</button>
+                    <div>
+                    
+                    <button id="add-btn"><a href="../admin/options.php">Options</a></button>
+
+                    </div>
                 </div>
                     <div class="table-wrapper">
                         <table class="styled-table">
