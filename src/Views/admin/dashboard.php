@@ -25,7 +25,6 @@ $session = new AuthSession();
     $totalRecruiter = $connexion->query("SELECT COUNT(*) AS count FROM member WHERE role_id = 2")->fetch(PDO::FETCH_ASSOC)['count'];
     $totalCandidate= $connexion->query("SELECT COUNT(*) AS count FROM member WHERE role_id = 3")->fetch(PDO::FETCH_ASSOC)['count'];
     $totalOffers = $connexion->query("SELECT COUNT(*) AS count FROM offer")->fetch(PDO::FETCH_ASSOC)['count'];
-    // $result = $connexion->query("SELECT * FROM offer")->fetch(PDO::FETCH_ASSOC);
     $offers = $connexion->query("SELECT * FROM offer")->fetchAll(PDO::FETCH_ASSOC);
 
 

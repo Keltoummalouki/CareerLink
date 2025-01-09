@@ -30,12 +30,12 @@ class AuthController{
             }
             else if($member->getRole()->getName() == "Recruiter")
             {
-              header("Location: ../recruiter/home.php");
+              header("Location: ../recruiter/index.php");
               exit();
             }
             else if($member->getRole()->getName() == "Candidate")
             {
-              header("Location: ../candidate/home.php");
+              header("Location: ../candidate/index.php");
               exit();
             }
         }

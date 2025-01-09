@@ -23,6 +23,8 @@ class NewMemberModel {
 
             $query = "INSERT INTO member (name, email,role_id, password  )
                         VALUES (:name, :email, :role, :password);";
+            
+            
 
             $stmt = $this->connexion->prepare($query);
             $stmt->bindParam(':name', $name);

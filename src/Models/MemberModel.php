@@ -19,15 +19,21 @@ class MemberModel{
         $query = "SELECT member.id, member.name,member.email, member.password, role.id as role_id, role.name as role_name
                   FROM member 
                   JOIN `role` ON role.id = member.role_id 
-                  WHERE member.email = :email AND member.password = :password";
+                  WHERE member.email = :email";
+
+        // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
  
             $stmt = $this->connexion->prepare($query);
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password);
+
             $stmt->execute();
     
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if(!$row){
+            $passwordDb = $row['password'];
+
+            $verfiy = password_verify($password, $passwordDb);
+
+            if(!$verfiy){
                 return null;
             }
             else{
